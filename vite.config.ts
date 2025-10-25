@@ -12,7 +12,7 @@ export default defineConfig({
             name: "gallery",
             filename: "remoteEntry.js",
             exposes: {
-                "./Gallery": "./src/page/Gallery.mount.ts",
+                "./Gallery": "./src/remotes/Gallery.mount.ts",
             },
             shared: {
                 'svelte': {
