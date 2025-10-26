@@ -1,13 +1,14 @@
 <script lang="ts">
 
     import { onMount } from "svelte"
-    import { getArtworks } from "../services/artworkService";
     import type { GetArtworksResponse } from "../types/artwork";
+    import { createApi } from "@aqulionnn/artique-api-lib/src/services/api";
 
     let artworks: GetArtworksResponse[] = []
+    const api = createApi(import.meta.env.VITE_API_URL);
 
     onMount(async () => {
-        artworks = await getArtworks()
+        artworks = await api.getArtworks();
     })
 
 </script>

@@ -20,6 +20,7 @@
     "vite": "^7.1.7"
   },
   "dependencies": {
+    "@aqulionnn/artique-api-lib": "^1.0.0",
     "@module-federation/vite": "^1.8.1",
     "axios": "^1.12.2",
     "svelte-routing": "^2.13.0",
