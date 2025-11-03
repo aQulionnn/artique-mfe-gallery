@@ -1,15 +1,26 @@
 <script lang="ts">
 
-    import type { GetArtworkByIdResponse } from "../types/artwork"
     import { onMount } from 'svelte'
-    import { createApi } from "@aqulionnn/artique-api-lib/src/services/api";
+    import { createApi } from "../services/api";
+
+    type Artwork = {
+        title: string
+        imageUrl: string
+        description: string
+        year: number
+        artist: {
+            name: string
+        }
+    }
 
     export let id: string
-    let artwork: GetArtworkByIdResponse
-    const api = createApi(import.meta.env.VITE_API_URL);
+    let artwork: Artwork
+    const api = createApi(`${import.meta.env.VITE_API_URL}/graphql`)
 
     onMount(async () => {
-        artwork = await api.getArtworkById(id)
+        const fields = ["title", "imageUrl", "description", "year", "artist { name }"]
+        const response = await api.getArtworkById<{ artworks: Artwork[] }>(id, fields)
+        artwork = response.data.artworkById
     })
 
 </script>
@@ -27,9 +38,9 @@
                 {artwork.description}
             </p>
             <h3 class="artist">
-                {artwork.artistName}
+                {artwork.artist.name}
             </h3>
-            <time datetime={artwork.year} class="year">
+            <time class="year">
                 {artwork.year}
             </time>
         </section>

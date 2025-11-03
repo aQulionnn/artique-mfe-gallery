@@ -1,14 +1,20 @@
 <script lang="ts">
 
     import { onMount } from "svelte"
-    import type { GetArtworksResponse } from "../types/artwork";
-    import { createApi } from "@aqulionnn/artique-api-lib/src/services/api";
+    import { createApi } from "../services/api";
 
-    let artworks: GetArtworksResponse[] = []
-    const api = createApi(import.meta.env.VITE_API_URL);
+    type Artwork = {
+        id: string
+        imageUrl: string
+    }
+
+    let artworks: Artwork[] = []
+    const api = createApi(`${import.meta.env.VITE_API_URL}/graphql`);
 
     onMount(async () => {
-        artworks = await api.getArtworks();
+        const fields = ["id", "imageUrl"]
+        const response = await api.getArtworks<{ artworks: Artwork[] }>(fields);
+        artworks = response.data.artworks;
     })
 
 </script>
