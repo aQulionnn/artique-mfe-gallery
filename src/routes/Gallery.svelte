@@ -1,7 +1,7 @@
 <script lang="ts">
 
     import { onMount } from "svelte"
-    import { createApi } from "../services/api";
+    import { createApi } from "@aqulionnn/artique-api-lib/src/services/api"
 
     type Artwork = {
         id: string
