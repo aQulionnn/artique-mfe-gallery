@@ -1,7 +1,7 @@
 <script lang="ts">
 
     import { onMount } from "svelte"
-    import { createApi } from "@aqulionnn/artique-api-lib/src/services/api"
+    import { createReadApi } from "@aqulionnn/artique-api-lib/src/services/readApi"
 
     type Artwork = {
         id: string
@@ -9,7 +9,7 @@
     }
 
     let artworks: Artwork[] = []
-    const api = createApi(`${import.meta.env.VITE_API_URL}/graphql`);
+    const api = createReadApi(`${import.meta.env.VITE_API_URL}/graphql`);
 
     onMount(async () => {
         const fields = ["id", "imageUrl"]

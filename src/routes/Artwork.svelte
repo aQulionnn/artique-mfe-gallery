@@ -1,7 +1,7 @@
 <script lang="ts">
 
     import { onMount } from 'svelte'
-    import { createApi } from "@aqulionnn/artique-api-lib/src/services/api"
+    import { createReadApi } from "@aqulionnn/artique-api-lib/src/services/readApi"
 
     type Artwork = {
         title: string
@@ -15,7 +15,7 @@
 
     export let id: string
     let artwork: Artwork
-    const api = createApi(`${import.meta.env.VITE_API_URL}/graphql`)
+    const api = createReadApi(`${import.meta.env.VITE_API_URL}/graphql`)
 
     onMount(async () => {
         const fields = ["title", "imageUrl", "description", "year", "artist { name }"]
@@ -50,60 +50,114 @@
 
 <style>
 
-    .artwork {
-        width: 100dvw;
-        height: 100dvh;
-        padding: 50px 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 100px;
-        background: #000;
+    @media (min-width: 1280px) {
+        .artwork {
+            width: 100dvw;
+            height: 100dvh;
+            padding: 50px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 100px;
+            background: #000;
+        }
+
+        .left-section {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .left-section img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .right-section {
+            width: 25%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 25px;
+
+            color: #fff;
+        }
+
+        .title {
+            line-height: 1.25;
+            letter-spacing: 1px;
+            word-spacing: 5px;
+        }
+
+        .description {
+            text-indent: 2em;
+            line-height: 1.75;
+            letter-spacing: 1px;
+            word-spacing: 1px;
+        }
+
+        .artist {
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .year {
+            text-align: end;
+        }
     }
 
-    .left-section {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    @media (max-width: 480px) {
+        .artwork {
+            width: 100dvw;
+            height: 100dvh;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
 
-    .left-section img {
-        max-width: 100%;
-        max-height: 100%;
-    }
+            background: #000;
+        }
 
-    .right-section {
-        width: 25%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        gap: 25px;
+        .left-section {
+            height: 50%;
+            display: flex;
+            /*align-items: center;*/
+            justify-content: center;
+        }
 
-        color: #fff;
-    }
+        .left-section img {
+            width: 100%;
+            height: 100%;
+        }
 
-    .title {
-        line-height: 1.25;
-        letter-spacing: 1px;
-        word-spacing: 5px;
-    }
 
-    .description {
-        text-indent: 2em;
-        line-height: 1.75;
-        letter-spacing: 1px;
-        word-spacing: 1px;
-    }
+        .right-section {
+            height: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+                gap: 25px;
 
-    .artist {
-        text-align: center;
-        letter-spacing: 1px;
-    }
+            color: #fff;
+        }
 
-    .year {
-        text-align: end;
+        .title {
+            text-align: center;
+        }
+
+        .description {
+            text-indent: 1em;
+        }
+
+        .artist {
+            text-align: center;
+        }
+
+        .year {
+            text-align: end;
+        }
     }
 
 </style>
