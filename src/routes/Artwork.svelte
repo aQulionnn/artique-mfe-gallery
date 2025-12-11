@@ -9,6 +9,7 @@
         description: string
         year: number
         artist: {
+            id: string
             name: string
         }
     }
@@ -18,7 +19,7 @@
     const api = createReadApi(`${import.meta.env.VITE_API_URL}/graphql`)
 
     onMount(async () => {
-        const fields = ["title", "imageUrl", "description", "year", "artist { name }"]
+        const fields = ["title", "imageUrl", "description", "year", "artist { id, name }"]
         const response = await api.getArtworkById<{ artworks: Artwork[] }>(id, fields)
         artwork = response.data.artworkById
     })
@@ -37,9 +38,9 @@
             <p class="description">
                 {artwork.description}
             </p>
-            <h3 class="artist">
+            <a class="artist" href={`/artists/${artwork.artist.id}/gallery`}>
                 {artwork.artist.name}
-            </h3>
+            </a>
             <time class="year">
                 {artwork.year}
             </time>
