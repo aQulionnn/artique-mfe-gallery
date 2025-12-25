@@ -39,7 +39,7 @@
     export let artistId: string
 
     onMount(async () => {
-        const fields = ["id", "imageUrl", "artistId"]
+        const fields = ["id", "imageUrl"]
         const response = await getArtworksByArtistId<{ artworks: Artwork[] }>(artistId, fields)
         artworks = response.data.artworksByArtistId
 

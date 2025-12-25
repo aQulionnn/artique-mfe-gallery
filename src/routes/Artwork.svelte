@@ -102,6 +102,7 @@
         .artist {
             text-align: center;
             letter-spacing: 1px;
+            color: var(--color-white)
         }
 
         .year {
